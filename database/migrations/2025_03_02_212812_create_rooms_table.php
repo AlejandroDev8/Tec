@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('status')->default(true);
+            $table->enum('status', ['activa', 'inactiva'])->default('activa');
             $table->timestamps();
         });
     }
