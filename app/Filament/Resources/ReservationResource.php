@@ -67,7 +67,7 @@ class ReservationResource extends Resource
                     ]),
                 Section::make('Fechas de inicio y fin')
                     ->columns(2)
-                    ->icon('heroicon-o-calendar')
+                    ->icon('heroicon-o-calendar-days')
                     ->schema([
                         Forms\Components\DatePicker::make('start_date')
                             ->required(),
@@ -87,6 +87,8 @@ class ReservationResource extends Resource
                     ->icon('heroicon-o-pencil')
                     ->schema([
                         Forms\Components\Textarea::make('notes')
+                            ->label('Notas extras')
+                            ->placeholder('Escribe aquí alguna nota extra...')
                             ->columnSpanFull(),
                         Forms\Components\Textarea::make('answer')
                             ->columnSpanFull()

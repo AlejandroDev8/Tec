@@ -6,6 +6,7 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -34,19 +35,27 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label('Nombre')
-                    ->required(),
-                Forms\Components\TextInput::make('email')
-                    ->label('Correo electrónico')
-                    ->email()
-                    ->required(),
-                Forms\Components\TextInput::make('password')
-                    ->label('Contraseña')
-                    ->hiddenOn('edit')
-                    ->revealable()
-                    ->password()
-                    ->required(),
+                Section::make('Datos del usuario')
+                    ->columns(2)
+                    ->icon('heroicon-o-user')
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label('Nombre')
+                            ->placeholder('Nombre del usuario')
+                            ->required(),
+                        Forms\Components\TextInput::make('email')
+                            ->label('Correo electrónico')
+                            ->placeholder('Correo electrónico del usuario')
+                            ->email()
+                            ->required(),
+                        Forms\Components\TextInput::make('password')
+                            ->label('Contraseña')
+                            ->hiddenOn('edit')
+                            ->placeholder('Contraseña del usuario')
+                            ->revealable()
+                            ->password()
+                            ->required(),
+                    ])
             ]);
     }
 

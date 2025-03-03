@@ -6,6 +6,7 @@ use App\Filament\Resources\DistributionResource\Pages;
 use App\Filament\Resources\DistributionResource\RelationManagers;
 use App\Models\Distribution;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -34,14 +35,19 @@ class DistributionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label('Nombre')
-                    ->placeholder('Nombre de la distribución')
-                    ->required(),
-                Forms\Components\Textarea::make('description')
-                    ->label('Descripción')
-                    ->placeholder('Descripción de la distribución')
-                    ->columnSpanFull(),
+                Section::make('Información')
+                    ->columns(2)
+                    ->icon('heroicon-o-information-circle')
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label('Nombre')
+                            ->placeholder('Nombre de la distribución')
+                            ->required(),
+                        Forms\Components\Textarea::make('description')
+                            ->label('Descripción')
+                            ->placeholder('Descripción de la distribución')
+                            ->columnSpanFull(),
+                    ])
             ]);
     }
 

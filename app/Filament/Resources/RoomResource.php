@@ -6,6 +6,7 @@ use App\Filament\Resources\RoomResource\Pages;
 use App\Filament\Resources\RoomResource\RelationManagers;
 use App\Models\Room;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -35,16 +36,22 @@ class RoomResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label('Nombre')
-                    ->required(),
-                Forms\Components\Select::make('status')
-                    ->label('Estado')
-                    ->options([
-                        'activa' => 'Activa',
-                        'inactiva' => 'Inactiva',
+                Section::make('Información de la sala')
+                    ->columns(2)
+                    ->icon('heroicon-o-information-circle')
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label('Nombre')
+                            ->placeholder('Ejemplo: Sala de juntas')
+                            ->required(),
+                        Forms\Components\Select::make('status')
+                            ->label('Estado')
+                            ->options([
+                                'activa' => 'Activa',
+                                'inactiva' => 'Inactiva',
+                            ])
+                            ->required(),
                     ])
-                    ->required(),
             ]);
     }
 
