@@ -48,14 +48,21 @@ class ReservationResource extends Resource
                         Forms\Components\Select::make('user_id')
                             ->relationship(name: 'user', titleAttribute: 'name')
                             ->label('Nombre del usuario')
+                            ->preload()
                             ->required(),
                         Forms\Components\Select::make('room_id')
-                            ->relationship(name: 'room', titleAttribute: 'name')
+                            ->relationship(
+                                'room',
+                                'name',
+                                fn($query) => $query->where('status', 'activa') // Filtra solo las salas activas
+                            )
+                            ->preload()
                             ->label('Nombre de la sala')
                             ->required(),
                         Forms\Components\Select::make('distribution_id')
                             ->relationship(name: 'distribution', titleAttribute: 'name')
                             ->label('Distribución de sillas')
+                            ->preload()
                             ->required(),
                     ]),
                 Section::make('Fechas de inicio y fin')
