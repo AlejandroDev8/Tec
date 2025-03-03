@@ -17,17 +17,17 @@ class Reservation extends Model
         'answer',
     ];
 
-    protected function user()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    protected function room()
+    public function room()
     {
         return $this->belongsTo(Room::class);
     }
 
-    protected function distribution()
+    public function distribution()
     {
         return $this->belongsTo(Distribution::class);
     }
