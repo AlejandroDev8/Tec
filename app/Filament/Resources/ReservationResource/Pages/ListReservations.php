@@ -13,8 +13,13 @@ class ListReservations extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
-                ->label('Crear Reservación'),
+            // Actions\CreateAction::make()
+            //     ->label('Crear Reservación'),
+
+            Actions\Action::make('goHome')
+                ->label('Ir al escritorio')
+                ->icon('heroicon-o-home')
+                ->url('/admin'),
         ];
     }
 }

@@ -13,7 +13,14 @@ class ListUsers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->color('warning')
+                ->icon('heroicon-o-plus-circle'),
+
+            Actions\Action::make('goHome')
+                ->label('Ir al escritorio')
+                ->icon('heroicon-o-home')
+                ->url('/admin'),
         ];
     }
 }
