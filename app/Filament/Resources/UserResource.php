@@ -2,17 +2,19 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
-use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\User;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Section;
 use Illuminate\Database\Eloquent\Builder;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\UserResource\RelationManagers;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class UserResource extends Resource
 {
@@ -90,6 +92,19 @@ class UserResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make()
+                        ->exports([
+                            ExcelExport::make('class')->fromTable()
+                                ->withFilename('Reservaciones_' . date('d-m-Y') . '_export')
+                                ->label('Exportar en formato de tabla')
+                                ->askForFilename(label: 'Nombre del archivo')
+                                ->askForWriterType(label: 'Formato de archivo'),
+                            ExcelExport::make('form')->fromForm()
+                                ->withFilename('Reservaciones_' . date('d-m-Y') . '_export')
+                                ->label('Exportar en formato de formulario')
+                                ->askForFilename(label: 'Nombre del archivo')
+                                ->askForWriterType(label: 'Formato de archivo'),
+                        ]),
                 ]),
             ]);
     }

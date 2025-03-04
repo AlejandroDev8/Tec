@@ -2,18 +2,20 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\RoomResource\Pages;
-use App\Filament\Resources\RoomResource\RelationManagers;
-use App\Models\Room;
 use Filament\Forms;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\Room;
 use Filament\Tables;
-use Filament\Tables\Filters\SelectFilter;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Section;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use App\Filament\Resources\RoomResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\RoomResource\RelationManagers;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class RoomResource extends Resource
 {
@@ -95,6 +97,19 @@ class RoomResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make()
+                        ->exports([
+                            ExcelExport::make('class')->fromTable()
+                                ->withFilename('Reservaciones_' . date('d-m-Y') . '_export')
+                                ->label('Exportar en formato de tabla')
+                                ->askForFilename(label: 'Nombre del archivo')
+                                ->askForWriterType(label: 'Formato de archivo'),
+                            ExcelExport::make('form')->fromForm()
+                                ->withFilename('Reservaciones_' . date('d-m-Y') . '_export')
+                                ->label('Exportar en formato de formulario')
+                                ->askForFilename(label: 'Nombre del archivo')
+                                ->askForWriterType(label: 'Formato de archivo'),
+                        ]),
                 ]),
             ]);
     }
