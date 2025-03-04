@@ -30,6 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->profile(isSimple: false)
             ->brandName('Reservaciones TecNM - Ciudad Valles')
+            ->favicon(asset('img/logo.ico'))
             ->sidebarFullyCollapsibleOnDesktop()
             ->userMenuItems([
                 'profile' => MenuItem::make()->label('Editar perfil')->icon('heroicon-o-user'),
