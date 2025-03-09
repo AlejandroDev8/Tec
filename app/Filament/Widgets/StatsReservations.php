@@ -9,6 +9,16 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class StatsReservations extends BaseWidget
 {
+    protected function getHeading(): ?string
+    {
+        return 'Reservaciones en el sistema';
+    }
+
+    protected function getDescription(): ?string
+    {
+        return 'Estadísticas de las reservaciones en el sistema';
+    }
+
     protected function getApprovedReservations(Reservation $reservation)
     {
         return $reservation->where('status', 'aceptada')->count();
