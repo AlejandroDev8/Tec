@@ -88,7 +88,7 @@ class ReservationResource extends Resource
                     ->columns(1)
                     ->icon('heroicon-o-pencil')
                     ->schema([
-                        Forms\Components\Textarea::make('notes')
+                        Forms\Components\MarkdownEditor::make('notes')
                             ->label('Notas extras')
                             ->placeholder('Escribe aquí alguna nota extra...')
                             ->columnSpanFull(),
